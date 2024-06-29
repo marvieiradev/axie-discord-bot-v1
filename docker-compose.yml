@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  axiebot:
+    build: .
+    restart: unless-stopped
+    user: node
+    env_file: .env
+    volumes:
+      - .:/workspace:cached
+    command: ["npm", "run", "${NODE_DEV-start}"]
+    ports:
+      - target: 3000
+        published: 3003
+        protocol: tcp

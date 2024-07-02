@@ -6,7 +6,8 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const app = express()
-app.use(express.static('public')) // https://vercel.com/guides/using-express-with-vercel#adding-a-public-directory
+//app.use(express.static('public')) // https://vercel.com/guides/using-express-with-vercel#adding-a-public-directory
+// app.use(express.static(path.join(__dirname, 'public'))) // https://vercel.com/guides/using-express-with-vercel#adding-a-public-directory
 
 if (process.env.DISCORD_PUBLIC_KEY === undefined) {
   throw new Error('Missing environment variable DISCORD_PUBLIC_KEY')

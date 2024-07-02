@@ -2,8 +2,8 @@
   "name": "axie-discord-bot",
   "version": "2.0.1",
   "author": {
-    "name": "alexx855",
-    "email": "hello@alexpedersen.dev"
+    "name": "author",
+    "email": "email@email.com"
   },
   "description": "A Discord bot that interacts with the Axie Infinity marketplace on the Ronin Network, capable of performing transactions using a private key.",
   "keywords": [

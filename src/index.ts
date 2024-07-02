@@ -15,7 +15,7 @@ if (process.env.DISCORD_PUBLIC_KEY === undefined) {
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.DISCORD_PUBLIC_KEY) }))
 
 app.get('/', (_req: Request, res: Response) => {
-  return res.send('alexx855.ron axie discord bot from @vercel/node 🚀')
+  return res.send('Axie discord bot from @vercel/node 🚀')
 })
 
 app.get('/hello', (_req: Request, res: Response) => {

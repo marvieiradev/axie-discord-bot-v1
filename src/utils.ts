@@ -1,7 +1,7 @@
 import { verifyKey } from 'discord-interactions'
 import { GRAPHQL_URL } from './constants'
 
-export function VerifyDiscordRequest (clientKey: string) {
+export function VerifyDiscordRequest(clientKey: string) {
   return function (req: any, res: any, buf: any, encoding: any) {
     const signature = req.get('X-Signature-Ed25519')
     const timestamp = req.get('X-Signature-Timestamp')
@@ -14,7 +14,7 @@ export function VerifyDiscordRequest (clientKey: string) {
   }
 }
 
-export async function discordRequest (endpoint: string, options: any): Promise<Response> {
+export async function discordRequest(endpoint: string, options: any): Promise<Response> {
   // append endpoint to root API URL
   const url = 'https://discord.com/api/v10/' + endpoint
   if (options?.body) options.body = JSON.stringify(options.body)
@@ -29,7 +29,7 @@ export async function discordRequest (endpoint: string, options: any): Promise<R
     headers: {
       Authorization: `Bot ${token}`,
       'Content-Type': 'application/json; charset=UTF-8',
-      'User-Agent': `AxieDiscordBot (https://github.com/alexx855/axie-discord-bot, ${process.env.npm_package_version})`
+      'User-Agent': `AxieDiscordBot (https://github.com/marvieiradev/axie-discord-bot-v1, ${process.env.npm_package_version})`
     },
     ...options
   })
@@ -43,7 +43,7 @@ export async function discordRequest (endpoint: string, options: any): Promise<R
   return res
 }
 
-export async function apiRequest<T> (
+export async function apiRequest<T>(
   url: string,
   body: BodyInit | null = null,
   headers: Record<string, string> = {},
@@ -62,11 +62,11 @@ export async function apiRequest<T> (
   return res
 }
 
-export function capitalize (str: string) {
+export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export async function fetchAxieQuery<T> (query: string, variables: Record<string, any>, headers?: Record<string, string>, method = 'POST') {
+export async function fetchAxieQuery<T>(query: string, variables: Record<string, any>, headers?: Record<string, string>, method = 'POST') {
   const response = await fetch(GRAPHQL_URL, {
     method,
     headers: {
@@ -80,7 +80,7 @@ export async function fetchAxieQuery<T> (query: string, variables: Record<string
   return res
 }
 
-export async function InstallGuildCommands (appId: string, guildId: string, commands: any[]) {
+export async function InstallGuildCommands(appId: string, guildId: string, commands: any[]) {
   // API endpoint to overwrite guild commands
   const endpoint = `applications/${appId}/guilds/${guildId}/commands`
 
@@ -93,7 +93,7 @@ export async function InstallGuildCommands (appId: string, guildId: string, comm
   }
 }
 
-export async function InstallGlobalCommands (appId: string, commands: any[]) {
+export async function InstallGlobalCommands(appId: string, commands: any[]) {
   // API endpoint to overwrite global commands
   const endpoint = `applications/${appId}/commands`
 
@@ -107,7 +107,7 @@ export async function InstallGlobalCommands (appId: string, commands: any[]) {
 }
 
 // Deletes all bot commands
-export async function DeleteCommands () {
+export async function DeleteCommands() {
   if (process.env.DISCORD_CLIENT_ID === undefined || process.env.DISCORD_GUILD_ID === undefined) {
     throw new Error('Missing environment variables')
   }
@@ -134,15 +134,15 @@ export async function DeleteCommands () {
   }
 }
 
-export function roninAddress (address: `0x${string}`) {
+export function roninAddress(address: `0x${string}`) {
   return address.replace('0x', 'ronin:').toLocaleLowerCase()
 }
 
-export function roninAddressToHex (address: string) {
+export function roninAddressToHex(address: string) {
   return address.replace('ronin:', '0x') as `0x${string}`
 }
 
-export function editMessage (channelId: string, messageId: string, content: string, components: any[] = []) {
+export function editMessage(channelId: string, messageId: string, content: string, components: any[] = []) {
   const endpoint = `channels/${channelId}/messages/${messageId}`
 
   void discordRequest(endpoint, {
